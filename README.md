@@ -1,4 +1,4 @@
-# ✈️ Flight Booking Aggregator (Like MakeMyTrip)
+# ✈️ Flight Booking Aggregator
 
 ## 🚀 Quick Start - Test the System
 
@@ -22,14 +22,14 @@ docker-compose down
 ✅ Search: Aggregating from 4 airlines in real-time  
 ✅ Booking: Successful! Airline reference stored
 ✅ Payment: Integration working
-🎊 SYSTEM IS A TRUE AGGREGATOR LIKE MAKEMYTRIP! 🎊
+🎊 SYSTEM IS A TRUE AGGREGATOR! 🎊
 ```
 
 ---
 
 ## 🎯 What This System Does
 
-This is a **TRUE flight aggregator** like MakeMyTrip, Expedia, or Google Flights. It:
+This is a **production-ready flight aggregator** that:
 
 - ✅ Aggregates flights from multiple airlines in real-time
 - ✅ Does NOT store flights in database (queries airline APIs)
@@ -38,7 +38,7 @@ This is a **TRUE flight aggregator** like MakeMyTrip, Expedia, or Google Flights
 - ✅ Handles payments with multiple methods
 - ✅ Provides unified customer experience
 
-**Key Principle:** We are an intermediary, not an airline. We don't own flights, we connect users to airlines.
+**Key Principle:** This system acts as an intermediary, not an airline. It doesn't own flights, it connects users to airlines.
 
 ---
 
@@ -51,7 +51,7 @@ This is a **TRUE flight aggregator** like MakeMyTrip, Expedia, or Google Flights
        │
        ▼
 ┌──────────────────────────────────────┐
-│   MMT AGGREGATOR (This System)        │
+│   FLIGHT AGGREGATOR SYSTEM           │
 │                                      │
 │  Database Stores:                    │
 │    ✅ Users                          │
@@ -79,7 +79,7 @@ This is a **TRUE flight aggregator** like MakeMyTrip, Expedia, or Google Flights
 ```
 User searches: DEL → BOM, Dec 15
       ↓
-MMT queries 4 airlines in parallel (async)
+System queries 4 airlines in parallel (async)
       ↓
 Aggregates 6 flights, sorts by price
       ↓
@@ -95,19 +95,19 @@ CACHE: Redis (temporary)
 ```
 User selects SpiceJet SG-234
       ↓
-MMT retrieves from cache
+System retrieves from cache
       ↓
-MMT calls SpiceJet's Booking API ← KEY!
+System calls SpiceJet's Booking API ← KEY!
       ↓
 SpiceJet creates booking: PNR = "SGABC123"
       ↓
-MMT stores in database:
-  - mmt_reference: "MMTFA9ACE6E"
+System stores in database:
+  - booking_reference: "AGG123456"
   - airline_pnr: "SGABC123" ← Reference!
   - airline_code: "SG"
       ↓
 User gets:
-  MMT Booking: MMTFA9ACE6E
+  Booking Reference: AGG123456
   Airline PNR: SGABC123
 
 DATABASE: Stores ONLY the reference!
@@ -117,11 +117,11 @@ DATABASE: Stores ONLY the reference!
 ```
 User pays ₹4,200
       ↓
-MMT calls Payment Gateway (Razorpay/Stripe)
+System calls Payment Gateway (Razorpay/Stripe)
       ↓
 Payment processed via Strategy Pattern
       ↓
-Status updated in MMT database
+Status updated in system database
       ↓
 Confirmation sent via Observer Pattern
 ```
@@ -144,7 +144,7 @@ CREATE TABLE users (
 CREATE TABLE bookings (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT,
-    booking_reference VARCHAR(50),      -- "MMTFA9ACE6E"
+    booking_reference VARCHAR(50),      -- "AGG123456"
     
     -- KEY FIELDS (Airline references)
     airline_code VARCHAR(10),           -- "SG"
@@ -172,7 +172,7 @@ CREATE TABLE payments (...);
 
 
 
-**Connection**: Our `airline_pnr = "SGABC123"` → Their `pnr = "SGABC123"`
+**Connection**: System's `airline_pnr = "SGABC123"` → Airline's `pnr = "SGABC123"`
 
 ---
 
@@ -333,8 +333,8 @@ GET /api/v1/payments/booking/{bookingId}
 
 ## 🎯 Key Differences: Aggregator vs Airline
 
-| Aspect | MMT (Us) | SpiceJet (Airline) |
-|--------|----------|-------------------|
+| Aspect | Aggregator System | Airline System |
+|--------|------------------|----------------|
 | Owns Flights? | ❌ No | ✅ Yes |
 | Manages Inventory? | ❌ No | ✅ Yes |
 | Creates Bookings? | ❌ Stores reference | ✅ Creates actual booking |
@@ -502,17 +502,17 @@ src/main/java/com/mmt/flightbooking/
 
 ## 🎯 Real-World Example
 
-When you book on MMT.com:
+When you book through this aggregator system:
 
-1. You see: "MMT Booking ID: 12345678"
+1. You see: "Booking ID: 12345678"
 2. Email contains: "Airline PNR: 6EABC123"
 3. You can use EITHER:
-   - MMT's ID to manage on MMT.com
+   - System's ID to manage your booking
    - Airline's PNR to check-in on IndiGo.com
 
 **Both refer to the SAME booking, which exists in IndiGo's system!**
 
-MMT is just the intermediary - they don't own the booking, they facilitate it.
+The aggregator system is just the intermediary - it doesn't own the booking, it facilitates it.
 
 ---
 
@@ -529,14 +529,6 @@ MMT is just the intermediary - they don't own the booking, they facilitate it.
 - ✅ Design Patterns (Strategy, Factory, Adapter, Observer)
 - ✅ Comprehensive Unit Tests
 - ✅ Integration Tests
-
----
-
-## 📞 Support
-
-For questions about the aggregator architecture, refer to the inline code comments and log output.
-
-**Built with ❤️ as a production-ready flight aggregator like MakeMyTrip**
 
 ---
 
