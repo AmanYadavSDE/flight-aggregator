@@ -20,7 +20,6 @@ docker-compose down
 ```
 ✅ Health: All systems operational
 ✅ Search: Aggregating from 4 airlines in real-time  
-✅ Database: 0 flights stored (TRUE aggregator model)
 ✅ Booking: Successful! Airline reference stored
 ✅ Payment: Integration working
 🎊 SYSTEM IS A TRUE AGGREGATOR LIKE MAKEMYTRIP! 🎊
@@ -169,24 +168,9 @@ CREATE TABLE passengers (...);
 -- Payments  
 CREATE TABLE payments (...);
 
--- What we DON'T store:
--- ❌ flights
--- ❌ flight_inventory  
--- ❌ airlines
--- ❌ airports
--- ❌ routes
 ```
 
-### **SpiceJet's Database** (not ours, in their system):
-```sql
-CREATE TABLE spicejet_bookings (
-    pnr VARCHAR(20) PRIMARY KEY,        -- "SGABC123"
-    flight_number VARCHAR(20),
-    seat_number VARCHAR(5),
-    ticket_number VARCHAR(20),
-    ...
-);
-```
+
 
 **Connection**: Our `airline_pnr = "SGABC123"` → Their `pnr = "SGABC123"`
 
