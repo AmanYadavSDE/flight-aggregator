@@ -1,0 +1,71 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/flightbooking
+    username: ${DB_USERNAME:flightuser}
+    password: ${DB_PASSWORD:flightpass}
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  redis:
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    timeout: 2000ms
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+      shutdown-timeout: 100ms
+
+# External service endpoints for Docker environment
+external:
+  airline:
+    indigo:
+      api:
+        url: http://mock-airline-api:1080
+        key: ${INDIGO_API_KEY:mock-key}
+    air-india:
+      api:
+        url: http://mock-airline-api:1080
+        key: ${AIR_INDIA_API_KEY:mock-key}
+    spicejet:
+      api:
+        url: http://mock-airline-api:1080
+        key: ${SPICEJET_API_KEY:mock-key}
+    vistara:
+      api:
+        url: http://mock-airline-api:1080
+        key: ${VISTARA_API_KEY:mock-key}
+  
+  payment:
+    razorpay:
+      api:
+        url: http://mock-payment-gateway:1080
+        key: ${RAZORPAY_API_KEY:mock-key}
+        secret: ${RAZORPAY_API_SECRET:mock-secret}
+    stripe:
+      api:
+        url: http://mock-payment-gateway:1080
+        key: ${STRIPE_API_KEY:mock-key}
+    paypal:
+      api:
+        url: http://mock-payment-gateway:1080
+        key: ${PAYPAL_API_KEY:mock-key}
+
+# Mock service configurations
+mock:
+  airline:
+    response-delay: 1000ms
+    success-rate: 0.95
+  payment:
+    response-delay: 500ms
+    success-rate: 0.90
