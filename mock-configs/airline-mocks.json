@@ -1,0 +1,79 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/flights/search"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "flights": [
+          {
+            "flightId": "6E-123",
+            "flightNumber": "6E-123",
+            "airline": "IndiGo",
+            "airlineCode": "6E",
+            "origin": "DEL",
+            "destination": "BOM",
+            "departureTime": "08:30",
+            "arrivalTime": "10:45",
+            "price": 4500,
+            "currency": "INR",
+            "durationMinutes": 135,
+            "stops": 0,
+            "availableSeats": 50,
+            "aircraftType": "A320",
+            "status": "AVAILABLE"
+          },
+          {
+            "flightId": "6E-456",
+            "flightNumber": "6E-456",
+            "airline": "IndiGo",
+            "airlineCode": "6E",
+            "origin": "DEL",
+            "destination": "BOM",
+            "departureTime": "14:15",
+            "arrivalTime": "16:30",
+            "price": 5200,
+            "currency": "INR",
+            "durationMinutes": 135,
+            "stops": 0,
+            "availableSeats": 45,
+            "aircraftType": "A320",
+            "status": "AVAILABLE"
+          }
+        ],
+        "totalCount": 2,
+        "success": true
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/airlines/indigo/flights"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "airline": "IndiGo",
+        "code": "6E",
+        "flights": [
+          {
+            "flightNumber": "6E-123",
+            "departureTime": "08:30",
+            "arrivalTime": "10:45",
+            "price": 4500,
+            "availableSeats": 50
+          }
+        ]
+      }
+    }
+  }
+]

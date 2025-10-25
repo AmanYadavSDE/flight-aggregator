@@ -1,0 +1,80 @@
+[
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/payments/process"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "success": true,
+        "transactionId": "TXN_MOCK_123456",
+        "status": "COMPLETED",
+        "message": "Payment processed successfully",
+        "gatewayResponse": "Payment successful",
+        "gatewayName": "Razorpay"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/payments/razorpay/process"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "success": true,
+        "transactionId": "RZP_MOCK_789012",
+        "status": "COMPLETED",
+        "message": "Razorpay payment successful",
+        "gatewayResponse": "Payment successful via Razorpay",
+        "gatewayName": "Razorpay"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/payments/stripe/process"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "success": true,
+        "transactionId": "STR_MOCK_345678",
+        "status": "COMPLETED",
+        "message": "Stripe payment successful",
+        "gatewayResponse": "Payment successful via Stripe",
+        "gatewayName": "Stripe"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/payments/status/.*"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "success": true,
+        "transactionId": "TXN_MOCK_123456",
+        "status": "COMPLETED",
+        "message": "Payment status retrieved successfully"
+      }
+    }
+  }
+]
